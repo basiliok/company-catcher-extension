@@ -1,0 +1,131 @@
+:root {
+  color-scheme: light dark;
+  --positive-color: #188038;
+  --negative-color: #d93025;
+}
+
+body {
+  width: 320px;
+  margin: 0;
+  padding: 14px;
+  font:
+    14px/1.4 system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+form {
+  display: flex;
+  gap: 6px;
+}
+
+#company-input {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 9px;
+  font: inherit;
+  border: 1px solid #8884;
+  border-radius: 6px;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+#add-form button {
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--positive-color);
+  color: #fff;
+}
+
+#company-list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+#company-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 9px;
+  border-radius: 6px;
+}
+
+#company-list li:nth-child(odd) {
+  background: #8881;
+}
+
+.company-name {
+  flex: 1;
+  overflow-wrap: anywhere;
+}
+
+.tone-switch {
+  appearance: none;
+  position: relative;
+  flex-shrink: 0;
+  width: 34px;
+  height: 18px;
+  margin: 0;
+  border-radius: 9px;
+  background: var(--negative-color);
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.tone-switch::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s;
+}
+
+.tone-switch:checked {
+  background: var(--positive-color);
+}
+
+.tone-switch:checked::before {
+  transform: translateX(16px);
+}
+
+.tone-switch:focus-visible {
+  outline: 2px solid #8888;
+  outline-offset: 2px;
+}
+
+.remove {
+  flex-shrink: 0;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: inherit;
+  opacity: 0.6;
+}
+
+.remove:hover {
+  opacity: 1;
+  color: var(--negative-color);
+}
+
+#empty-message {
+  margin: 12px 0 0;
+  opacity: 0.7;
+}

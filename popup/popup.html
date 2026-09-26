@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>CompanyCatcher</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <h1>CompanyCatcher</h1>
+    <form id="add-form" autocomplete="off" novalidate>
+      <input
+        id="company-input"
+        type="text"
+        placeholder="Escribe una empresa y presiona Enter"
+        autofocus
+      />
+      <button type="submit">Agregar</button>
+    </form>
+    <ul id="company-list"></ul>
+    <p id="empty-message">
+      A&uacute;n no hay empresas. Agrega una para empezar.
+    </p>
+    <script src="popup.js"></script>
+  </body>
+</html>
