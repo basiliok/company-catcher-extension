@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "CompanyCatcher",
   "version": "0.1.0",
-  "description": "Resalta en Bumeran, en verde o en rojo, las ofertas de trabajo de las empresas que agregues a tu lista.",
+  "description": "Resalta en verde o atenúa en gris, en Bumeran y LinkedIn, las ofertas de trabajo de las empresas que agregues a tu lista.",
   "minimum_chrome_version": "110",
   "permissions": ["storage"],
   "action": {
@@ -22,7 +22,13 @@
   "content_scripts": [
     {
       "matches": ["https://*.bumeran.com.pe/*"],
-      "js": ["content/highlighter.js"],
+      "js": ["content/highlighter.js", "content/sites/bumeran.js"],
+      "css": ["content/highlighter.css"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.linkedin.com/*"],
+      "js": ["content/highlighter.js", "content/sites/linkedin.js"],
       "css": ["content/highlighter.css"],
       "run_at": "document_idle"
     }

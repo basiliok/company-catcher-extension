@@ -1,9 +1,8 @@
-(() => {
+function highlightCompanies(site) {
 	const STORAGE_KEY = "companies";
-	const JOB_CARD_SELECTOR = 'a[aria-labelledby*="job-posting"]';
-	const CARD_HEADER_SELECTOR = '[id^="header-col-job-posting-"]';
 	const CARD_TONE_ATTRIBUTE = "data-company-catcher-card";
 	const NAME_TONE_ATTRIBUTE = "data-company-catcher-name";
+	const SUMMARY_ATTRIBUTE = "data-company-catcher-summary";
 
 	if (!document.body) return;
 
@@ -11,20 +10,6 @@
 
 	function normalize(text) {
 		return text.replace(/\s+/g, " ").toLowerCase();
-	}
-
-	function findCompanyNameElement(card) {
-		const header = card.querySelector(CARD_HEADER_SELECTOR);
-		if (!header) return null;
-
-		// Orden en el header: fecha (h3), título (h2), empresa (h3), valoración (h3).
-		const headings = [...header.querySelectorAll("h2, h3")];
-		const titleIndex = headings.findIndex(
-			(heading) => heading.localName === "h2",
-		);
-		if (titleIndex === -1) return null;
-
-		return headings[titleIndex + 1] ?? null;
 	}
 
 	function findMatchingCompany(companyName) {
@@ -35,21 +20,26 @@
 	}
 
 	function highlightCard(card) {
-		const nameElement = findCompanyNameElement(card);
-		if (!nameElement) return;
+		const cardParts = site.findTitleAndCompanyName(card);
+		if (!cardParts) return;
 
-		const company = findMatchingCompany(nameElement.textContent);
+		const { titleElement, companyNameElement } = cardParts;
+		const company = findMatchingCompany(companyNameElement.textContent);
 		if (company) {
 			card.setAttribute(CARD_TONE_ATTRIBUTE, company.tone);
-			nameElement.setAttribute(NAME_TONE_ATTRIBUTE, company.tone);
+			companyNameElement.setAttribute(NAME_TONE_ATTRIBUTE, company.tone);
+			titleElement.setAttribute(SUMMARY_ATTRIBUTE, "");
+			companyNameElement.setAttribute(SUMMARY_ATTRIBUTE, "");
 		} else {
 			card.removeAttribute(CARD_TONE_ATTRIBUTE);
-			nameElement.removeAttribute(NAME_TONE_ATTRIBUTE);
+			companyNameElement.removeAttribute(NAME_TONE_ATTRIBUTE);
+			titleElement.removeAttribute(SUMMARY_ATTRIBUTE);
+			companyNameElement.removeAttribute(SUMMARY_ATTRIBUTE);
 		}
 	}
 
 	function highlightAllCards() {
-		for (const card of document.querySelectorAll(JOB_CARD_SELECTOR)) {
+		for (const card of document.querySelectorAll(site.jobCardSelector)) {
 			highlightCard(card);
 		}
 	}
@@ -77,4 +67,4 @@
 	chrome.storage.local
 		.get(STORAGE_KEY)
 		.then((stored) => applyCompanies(stored[STORAGE_KEY]));
-})();
+}

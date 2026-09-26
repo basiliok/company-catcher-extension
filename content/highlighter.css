@@ -18,14 +18,10 @@
   }
 
   & :not(
-    :has([id^="header-col-job-posting-"]),
-    [id^="header-col-job-posting-"],
-    [id^="header-col-job-posting-"] *
+    :has([data-company-catcher-summary]),
+    [data-company-catcher-summary],
+    [data-company-catcher-summary] *
   ) {
-    display: none;
-  }
-
-  & [id^="header-col-job-posting-"] :not(h2, h3, h2 *, h3 *, :has(h2, h3)) {
     display: none;
   }
 }

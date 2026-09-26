@@ -1,7 +1,8 @@
 :root {
   color-scheme: light dark;
   --positive-color: #188038;
-  --negative-color: #d93025;
+  --negative-color: #80868b;
+  --remove-color: #d93025;
 }
 
 body {
@@ -126,5 +127,5 @@ button {
 
 .remove:hover {
   opacity: 1;
-  color: var(--negative-color);
+  color: var(--remove-color);
 }
