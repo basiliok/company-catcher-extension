@@ -4,13 +4,11 @@ const STORAGE_KEY = "companies";
 const addCompanyForm = document.getElementById("add-form");
 const companyInput = document.getElementById("company-input");
 const companyList = document.getElementById("company-list");
-const emptyMessageElement = document.getElementById("empty-message");
 
 let companies = [];
 
 function renderCompanyList() {
 	companyList.replaceChildren(...companies.map(createCompanyItem));
-	emptyMessageElement.hidden = companies.length > 0;
 }
 
 function saveCompanies() {
