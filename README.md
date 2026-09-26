@@ -2,6 +2,8 @@
 
 Extensión de Chrome que resalta en Bumeran y LinkedIn las ofertas de trabajo de las empresas que agregues a tu lista: en verde (positivo) o atenuadas en gris (negativo).
 
+![CompanyCatcher en Bumeran: una oferta resaltada en verde y otra atenuada en gris](docs/screenshot.png)
+
 ## Instalación
 
 1. Abre `chrome://extensions` y activa el **Modo de desarrollador**.
